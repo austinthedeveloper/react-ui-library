@@ -13,6 +13,7 @@
     "test-storybook": "test-storybook"
   },
   "dependencies": {
+    "@storybook/jest": "^0.2.2",
     "bootstrap": "^5.3.7",
     "classnames": "^2.5.1",
     "react": "^19.1.0",

@@ -1,6 +1,8 @@
 
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Button from './button';
+import { userEvent, within } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -13,7 +15,7 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: 'select',
-      options: ['sm', 'lg'],
+      options: ['sm', 'md', 'lg'],
     },
   },
 };
@@ -25,6 +27,33 @@ export const Primary: Story = {
   args: {
     variant: 'primary',
     children: 'Primary Button',
+  },
+    play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = await canvas.getByRole('button');
+    await expect(button).toHaveTextContent('Primary Button');
+  },
+};
+
+
+export const Secondary: Story = {
+  args: {
+    variant: "secondary",
+    children: "Secondary Button",
+    size: "md",
+    disabled: false
+  }
+};
+
+export const Success: Story = {
+  args: {
+    variant: 'success',
+    children: 'Success',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = await canvas.getByRole('button');
+    await expect(button).toHaveClass('btn-success');
   },
 };
 
@@ -38,8 +67,13 @@ export const DangerLarge: Story = {
 
 export const Disabled: Story = {
   args: {
-    variant: 'secondary',
-    disabled: true,
     children: 'Disabled',
+    disabled: true,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = await canvas.getByRole('button');
+
+    await expect(button).toBeDisabled();
   },
 };

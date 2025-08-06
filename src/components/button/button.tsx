@@ -4,7 +4,7 @@ import classNames from 'classnames';
 export type ButtonProps = {
   children: React.ReactNode;
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
-  size?: 'sm' | 'lg';
+  size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
   onClick?: () => void;
 };
