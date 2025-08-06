@@ -6,6 +6,7 @@ export type ButtonProps = {
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark';
   size?: 'sm' | 'md' | 'lg';
   disabled?: boolean;
+  type: 'button' | 'submit'
   onClick?: () => void;
 };
 
