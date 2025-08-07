@@ -68,3 +68,11 @@ export const ImageWrongProportions: Story = {
     title: "Epic Adventure Epic Adventure Epic Adventure Epic Adventure",
   },
 };
+
+export const WithProgress: Story = {
+  args: {
+    imageUrl: "/movies/image.png",
+    title: "Movie Title",
+    progress: 60
+  }
+};

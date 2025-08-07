@@ -10,6 +10,9 @@ $card-radius: 6px;
     .media-card-title {
       visibility: visible;
     }
+    .media-card-action {
+      display: block;
+    }
   }
   &.media-card-sm {
   }
@@ -19,41 +22,62 @@ $card-radius: 6px;
 
   &.media-card-lg {
   }
-}
 
-.media-card-image-wrapper {
-  position: relative;
-  aspect-ratio: 2 / 3;
-  height: auto;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  border-radius: 8px;
-  overflow: hidden;
-}
+  .media-card-image-wrapper {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    overflow: hidden;
+  }
 
-.media-card-image {
-  width: 100%;
-}
+  .media-card-image {
+    width: 100%;
+  }
 
-.media-card-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(255, 255, 255);
-  font-weight: 600;
-  padding: 2px 8px;
-  border-bottom-right-radius: $card-radius;
-}
+  .media-card-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--bs-white);
+    font-weight: 600;
+    padding: 2px 8px;
+    border-bottom-right-radius: $card-radius;
+  }
 
-.media-card-title {
-  transition: 0.2s all ease-in-out;
-  visibility: hidden;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgb(255, 255, 255);
-  font-weight: 600;
-  padding: 2px 14px;
+  .media-card-title {
+    transition: 0.2s all ease-in-out;
+    visibility: hidden;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    width: 100%;
+    background-color: var(--bs-white);
+    font-weight: 600;
+    padding: 2px 14px;
+  }
+
+  .media-card-progress {
+    position: absolute;
+    bottom: 0;
+    height: 8px;
+    background-color: var(--bs-light);
+    width: 100%;
+    .media-card-progress-bar {
+      height: 100%;
+      background-color: var(--bs-blue);
+    }
+  }
+
+  .media-card-action {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    display: none;
+  }
 }
