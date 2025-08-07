@@ -35,8 +35,8 @@ const MediaCard: React.FC<MediaCardProps> = ({
           alt={title || "Media card image"}
           className="media-card-image"
         />
-        {label && <span className="media-card-label">{label}</span>}
       </div>
+      {label && <span className="media-card-label">{label}</span>}
       {title && <div className="media-card-title">{title}</div>}
     </div>
   );

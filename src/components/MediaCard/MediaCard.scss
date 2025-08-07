@@ -1,23 +1,51 @@
+$card-radius: 6px;
 .media-card {
-}
+  width: 100%;
+  position: relative;
+  transition: all ease-in-out 0.2s;
+  filter: drop-shadow(-2px 6px 10px #5e5e5e);
+  &:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0px 8px 10px #5e5e5e);
+    .media-card-title {
+      visibility: visible;
+    }
+  }
+  &.media-card-sm {
+  }
 
-.media-card-sm {
-}
+  &.media-card-md {
+  }
 
-.media-card-md {
-}
-
-.media-card-lg {
+  &.media-card-lg {
+  }
 }
 
 .media-card-image-wrapper {
 }
 
 .media-card-image {
+  width: 100%;
 }
 
 .media-card-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  font-weight: 600;
+  padding: 2px 8px;
+  border-bottom-right-radius: $card-radius;
 }
 
 .media-card-title {
+  transition: 0.2s all ease-in-out;
+  visibility: hidden;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  font-weight: 600;
+  padding: 2px 14px;
 }
