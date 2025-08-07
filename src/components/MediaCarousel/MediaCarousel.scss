@@ -53,3 +53,34 @@
     }
   }
 }
+
+.media-carousel-container {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5), transparent);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.5), transparent);
+  }
+  &.hide-left::before {
+    display: none;
+  }
+  &.hide-right::after {
+    display: none;
+  }
+}
