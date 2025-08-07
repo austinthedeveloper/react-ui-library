@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import "./MediaCard.scss";
 
-type MediaCardProps = {
+export type MediaCardProps = {
   imageUrl: string;
   title?: string;
   size?: "sm" | "md" | "lg";
