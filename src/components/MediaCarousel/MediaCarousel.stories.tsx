@@ -17,6 +17,7 @@ export const Default: Story = {
       imageUrl: "/movies/image.png",
       title: `Movie ${i + 1}`,
       label: i % 3 === 0 ? "NEW" : undefined,
+      progress: Math.random() * 100,
     })),
   },
 };

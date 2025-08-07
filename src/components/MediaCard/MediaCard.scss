@@ -50,10 +50,22 @@ $card-radius: 6px;
   transition: 0.2s all ease-in-out;
   visibility: hidden;
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   left: 0;
   width: 100%;
   background-color: rgb(255, 255, 255);
   font-weight: 600;
   padding: 2px 14px;
+}
+
+.media-card-progress {
+  position: absolute;
+  bottom: 0;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 100%;
+  .media-card-progress-bar {
+    height: 100%;
+    background-color: #f00;
+  }
 }

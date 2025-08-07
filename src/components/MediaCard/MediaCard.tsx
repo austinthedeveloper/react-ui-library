@@ -8,6 +8,7 @@ export type MediaCardProps = {
   size?: "sm" | "md" | "lg";
   label?: string; // e.g., “New”, “HD”
   onClick?: () => void;
+  progress?: number;
 };
 
 const MediaCard: React.FC<MediaCardProps> = ({
@@ -15,6 +16,7 @@ const MediaCard: React.FC<MediaCardProps> = ({
   title,
   size = "md",
   label,
+  progress,
   onClick,
 }) => {
   const classes = classNames("media-card", {
@@ -35,6 +37,16 @@ const MediaCard: React.FC<MediaCardProps> = ({
       ></div>
       {label && <span className="media-card-label">{label}</span>}
       {title && <div className="media-card-title">{title}</div>}
+      {typeof progress === "number" && (
+        <div className="media-card-progress">
+          <div
+            className="media-card-progress-bar"
+            style={{
+              width: `${progress}%`,
+            }}
+          ></div>
+        </div>
+      )}
     </div>
   );
 };
