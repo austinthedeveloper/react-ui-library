@@ -14,7 +14,7 @@ export const Default: Story = {
   args: {
     title: "Featured Titles",
     items: Array.from({ length: 10 }).map((_, i) => ({
-      imageUrl: "src/assets/movies/image.png",
+      imageUrl: "/public/movies/image.png",
       title: `Movie ${i + 1}`,
       label: i % 3 === 0 ? "NEW" : undefined,
     })),
