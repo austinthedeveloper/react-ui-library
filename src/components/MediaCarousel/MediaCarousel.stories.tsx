@@ -20,3 +20,9 @@ export const Default: Story = {
     })),
   },
 };
+export const LargeScroll: Story = {
+  args: {
+    ...Default.args,
+    cardsPerScroll: 4,
+  },
+};

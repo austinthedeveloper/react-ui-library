@@ -6,9 +6,24 @@ import classNames from "classnames";
 type MediaCarouselProps = {
   title?: string;
   items: MediaCardProps[];
+  cardsPerScroll?: number;
 };
 
-const MediaCarousel: React.FC<MediaCarouselProps> = ({ title, items }) => {
+const MediaCarousel: React.FC<MediaCarouselProps> = ({
+  title,
+  items,
+  cardsPerScroll = 1,
+}) => {
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const [cardWidth, setCardWidth] = useState(0);
+
+  useEffect(() => {
+    if (cardRef.current) {
+      setCardWidth(cardRef.current.offsetWidth);
+    }
+  }, [items]);
+  const scrollAmount = cardWidth * (cardsPerScroll ?? 1);
+
   const scrollRef = React.useRef<HTMLDivElement>(null);
 
   const scrollBy = (offset: number) => {
@@ -49,7 +64,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ title, items }) => {
         {canScrollLeft && (
           <button
             className="media-carousel-arrow left"
-            onClick={() => scrollBy(-300)}
+            onClick={() => scrollBy(-scrollAmount)}
           >
             &lt;
           </button>
@@ -57,7 +72,11 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ title, items }) => {
 
         <div className="media-carousel-track" ref={scrollRef}>
           {items.map((item, i) => (
-            <div key={i} className="media-carousel-item">
+            <div
+              key={i}
+              className="media-carousel-item"
+              ref={i === 0 ? cardRef : undefined}
+            >
               <MediaCard {...item} />
             </div>
           ))}
@@ -65,7 +84,7 @@ const MediaCarousel: React.FC<MediaCarouselProps> = ({ title, items }) => {
         {canScrollRight && (
           <button
             className="media-carousel-arrow right"
-            onClick={() => scrollBy(300)}
+            onClick={() => scrollBy(scrollAmount)}
           >
             &gt;
           </button>
