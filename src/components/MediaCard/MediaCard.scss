@@ -22,6 +22,14 @@ $card-radius: 6px;
 }
 
 .media-card-image-wrapper {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .media-card-image {

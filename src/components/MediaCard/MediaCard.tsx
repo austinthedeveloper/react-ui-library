@@ -29,13 +29,10 @@ const MediaCard: React.FC<MediaCardProps> = ({
       onClick={onClick}
       style={{ cursor: onClick ? "pointer" : "default" }}
     >
-      <div className="media-card-image-wrapper">
-        <img
-          src={imageUrl}
-          alt={title || "Media card image"}
-          className="media-card-image"
-        />
-      </div>
+      <div
+        className="media-card-image-wrapper"
+        style={{ backgroundImage: `url(${imageUrl})` }}
+      ></div>
       {label && <span className="media-card-label">{label}</span>}
       {title && <div className="media-card-title">{title}</div>}
     </div>

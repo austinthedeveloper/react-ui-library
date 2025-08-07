@@ -61,3 +61,10 @@ export const LongTitle: Story = {
     title: "Epic Adventure Epic Adventure Epic Adventure Epic Adventure",
   },
 };
+
+export const ImageWrongProportions: Story = {
+  args: {
+    imageUrl: "src/assets/movies/dummy-image-01.png",
+    title: "Epic Adventure Epic Adventure Epic Adventure Epic Adventure",
+  },
+};
