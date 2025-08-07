@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import MediaCarousel from "./MediaCarousel";
+import { DummyMedia, DummyMediaExtremes } from "../../storybook/helpers";
 
 const meta: Meta<typeof MediaCarousel> = {
   title: "Components/MediaCarousel",
@@ -13,12 +14,13 @@ type Story = StoryObj<typeof MediaCarousel>;
 export const Default: Story = {
   args: {
     title: "Featured Titles",
-    items: Array.from({ length: 10 }).map((_, i) => ({
-      imageUrl: "/movies/image.png",
-      title: `Movie ${i + 1}`,
-      label: i % 3 === 0 ? "NEW" : undefined,
-      progress: Math.random() * 100,
-    })),
+    items: DummyMedia,
+  },
+};
+export const ExtremeValues: Story = {
+  args: {
+    title: "Featured Titles",
+    items: DummyMediaExtremes,
   },
 };
 export const LargeScroll: Story = {

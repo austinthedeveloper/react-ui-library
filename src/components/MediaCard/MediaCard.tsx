@@ -13,10 +13,9 @@ export type MediaCardProps = {
 
 const MediaCard: React.FC<MediaCardProps> = ({
   imageUrl,
-  title,
   size = "md",
   label,
-  progress,
+  progress = 0,
   onClick,
 }) => {
   const classes = classNames("media-card", {
@@ -24,6 +23,12 @@ const MediaCard: React.FC<MediaCardProps> = ({
     "media-card-md": size === "md",
     "media-card-lg": size === "lg",
   });
+
+  const getActionLabel = () => {
+    if (progress === 0) return "Watch Now";
+    if (progress === 100) return "Watch Again";
+    return "Resume";
+  };
 
   return (
     <div
@@ -36,8 +41,8 @@ const MediaCard: React.FC<MediaCardProps> = ({
         style={{ backgroundImage: `url(${imageUrl})` }}
       ></div>
       {label && <span className="media-card-label">{label}</span>}
-      {title && <div className="media-card-title">{title}</div>}
-      {typeof progress === "number" && (
+      {/* Progress */}
+      {typeof progress === "number" && progress > 0 && (
         <div className="media-card-progress">
           <div
             className="media-card-progress-bar"
@@ -46,6 +51,12 @@ const MediaCard: React.FC<MediaCardProps> = ({
             }}
           ></div>
         </div>
+      )}
+      {/* Watch Button */}
+      {onClick && (
+        <button className="media-card-action btn btn-primary">
+          {getActionLabel()}
+        </button>
       )}
     </div>
   );
