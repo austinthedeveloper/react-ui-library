@@ -1,10 +1,5 @@
 import "./Playing.scss";
 
-import {
-  faClosedCaptioning,
-  faTowerBroadcast,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
@@ -58,14 +53,6 @@ const Playing: React.FC<PlayingProps> = ({
 
   return (
     <div className="playing-container">
-      <div className={`playing-header ${!isVisible ? "invisible" : ""}`}>
-        <span className="playing-label">{brand}</span>
-        <span className="playing-title">{title}</span>
-        <div className="playing-icons">
-          <FontAwesomeIcon icon={faTowerBroadcast} />
-          <FontAwesomeIcon icon={faClosedCaptioning} />
-        </div>
-      </div>
       <img src="/movies/movie-scene.png" />
       {isVisible && (
         <>
