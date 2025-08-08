@@ -1,0 +1,75 @@
+.playing-container {
+  background: black;
+  color: white;
+  font-family: sans-serif;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  img {
+    width: 100%;
+  }
+}
+
+.playing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .playing-label {
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+  .playing-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .playing-icons {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.playing-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.playing-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0 20px;
+
+  .progress-bar {
+    flex-grow: 1;
+    height: 4px;
+    background-color: #444;
+    position: relative;
+
+    .progress-fill {
+      height: 100%;
+      background-color: var(--bs-blue);
+    }
+  }
+
+  span {
+    font-size: 0.75rem;
+    width: 50px;
+    text-align: center;
+  }
+}
+
+.playing-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  font-size: 1.2rem;
+  padding-bottom: 20px;
+}
