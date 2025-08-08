@@ -4,33 +4,33 @@
   left: 0;
   width: 100%;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-}
+  .playing-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    padding: 0 20px;
 
-.playing-progress {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
-  padding: 0 20px;
-
-  span {
-    font-size: 0.75rem;
-    width: 50px;
-    text-align: center;
+    span {
+      font-size: 0.75rem;
+      width: 50px;
+      text-align: center;
+    }
   }
-}
 
-.playing-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  font-size: 1.2rem;
-  padding-bottom: 20px;
-  svg {
-    opacity: 0.7;
-    cursor: pointer;
-    &:hover {
-      opacity: 1;
+  .playing-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 1.2rem;
+    padding-bottom: 20px;
+    align-items: center;
+    svg {
+      opacity: 0.7;
+      cursor: pointer;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }

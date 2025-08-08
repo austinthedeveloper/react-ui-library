@@ -55,10 +55,6 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
           icon={faRedoAlt}
           onClick={() => onControl?.("forward")}
         />
-        <FontAwesomeIcon
-          icon={faVolumeUp}
-          onClick={() => onControl?.("volume")}
-        />
         <VolumeControl
           value={volume}
           isMuted={isMuted}
