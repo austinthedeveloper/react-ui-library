@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Playing.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,22 +15,60 @@ type PlayingProps = {
   title: string;
   currentTime: string;
   duration: string;
+  brand: string;
+  autoHide?: boolean;
+  autoHideDelay?: number;
 };
 
-const Playing: React.FC<PlayingProps> = ({ title, currentTime, duration }) => {
+const Playing: React.FC<PlayingProps> = ({
+  title,
+  currentTime,
+  duration,
+  brand = "Flicksy",
+  autoHide = true,
+  autoHideDelay = 2000,
+}) => {
+  const [isVisible, setIsVisible] = useState(true);
+  const hideTimer = useRef<NodeJS.Timeout | null>(null);
+  const resetHideTimer = () => {
+    if (!autoHide) return;
+
+    setIsVisible(true);
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+
+    hideTimer.current = setTimeout(() => {
+      setIsVisible(false);
+    }, autoHideDelay || 3000);
+  };
+  useEffect(() => {
+    if (!autoHide) return;
+
+    const handleUserActivity = () => resetHideTimer();
+
+    window.addEventListener("mousemove", handleUserActivity);
+    window.addEventListener("keydown", handleUserActivity);
+
+    resetHideTimer(); // Start the initial timer
+
+    return () => {
+      window.removeEventListener("mousemove", handleUserActivity);
+      window.removeEventListener("keydown", handleUserActivity);
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+    };
+  }, [autoHide, autoHideDelay]);
+
   return (
     <div className="playing-container">
-      <div className="playing-header">
-        <span className="playing-label">Flicksy</span>
+      <div className={`playing-header ${!isVisible ? "d-none" : ""}`}>
+        <span className="playing-label">{brand}</span>
         <span className="playing-title">{title}</span>
         <div className="playing-icons">
-          {/* TODO: Fix Chromecast icon */}
           <FontAwesomeIcon icon={faTowerBroadcast} />
           <FontAwesomeIcon icon={faClosedCaptioning} />
         </div>
       </div>
       <img src="/movies/movie-scene.png" />
-      <div className="playing-footer">
+      <div className={`playing-footer ${!isVisible ? "d-none" : ""}`}>
         <div className="playing-progress">
           <span>{currentTime}</span>
           <div className="progress-bar">
