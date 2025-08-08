@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { ProgressBarMedia } from "./ProgressBarMedia";
 
 const meta: Meta<typeof ProgressBarMedia> = {
-  title: "Components/ProgressBarMedia",
+  title: "Media Components/ProgressBarMedia",
   component: ProgressBarMedia,
   parameters: {
     layout: "centered",

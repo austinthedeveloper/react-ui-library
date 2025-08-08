@@ -1,5 +1,5 @@
 import "./Playing.scss";
-import React from "react";
+import React, { useState } from "react";
 import { useAutoHide } from "./useAutoHide"; // <-- custom hook
 import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
 import { PlayingHeader } from "../PlayingHeader/PlayingHeader";
@@ -22,6 +22,8 @@ const Playing: React.FC<PlayingProps> = ({
   autoHideDelay = 2000,
 }) => {
   const isVisible = useAutoHide(autoHide, autoHideDelay);
+  const [volume, setVolume] = useState(0.5);
+  const [isMuted, setIsMuted] = useState(false);
 
   const handleControl = (action: string) => {
     console.log("Control clicked:", action);
@@ -42,6 +44,10 @@ const Playing: React.FC<PlayingProps> = ({
             currentTime={currentTime}
             duration={duration}
             onControl={handleControl}
+            volume={volume}
+            isMuted={isMuted}
+            onVolumeChange={setVolume}
+            onMuteToggle={() => setIsMuted((prev) => !prev)}
           />
         </>
       )}

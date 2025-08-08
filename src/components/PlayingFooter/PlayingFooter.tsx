@@ -10,12 +10,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./PlayingFooter.scss";
 import type { PlayerControl } from "../../models";
+import { VolumeControl } from "../VolumeControl/VolumeControl";
 
 interface PlayingFooterProps {
   currentTime: string;
   duration: string;
   onSeek?: (seconds: string) => void;
   onControl: (action: PlayerControl) => void;
+  volume: number;
+  isMuted: boolean;
+  onVolumeChange: (value: number) => void;
+  onMuteToggle: () => void;
 }
 
 export const PlayingFooter: React.FC<PlayingFooterProps> = ({
@@ -23,6 +28,10 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
   duration,
   onSeek,
   onControl,
+  volume,
+  isMuted,
+  onVolumeChange,
+  onMuteToggle,
 }) => {
   return (
     <div className="playing-footer">
@@ -49,6 +58,12 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
         <FontAwesomeIcon
           icon={faVolumeUp}
           onClick={() => onControl?.("volume")}
+        />
+        <VolumeControl
+          value={volume}
+          isMuted={isMuted}
+          onChange={onVolumeChange}
+          onToggleMute={onMuteToggle}
         />
         <FontAwesomeIcon
           icon={faExpand}

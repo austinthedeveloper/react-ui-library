@@ -17,7 +17,7 @@ const mockData: MediaItemDetails = {
 };
 
 const meta: Meta<typeof MediaDetails> = {
-  title: "Components/MediaDetails",
+  title: "Media Components/MediaDetails",
   component: MediaDetails,
 };
 
