@@ -1,16 +1,13 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Playing.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
-  faPlay,
-  faUndoAlt,
-  faRedoAlt,
-  faVolumeUp,
-  faExpand,
   faClosedCaptioning,
   faTowerBroadcast,
 } from "@fortawesome/free-solid-svg-icons";
-import { ProgressBarMedia } from "../ProgressBarMedia/ProgressBarMedia";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+
+import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
 
 type PlayingProps = {
   title: string;
@@ -69,21 +66,9 @@ const Playing: React.FC<PlayingProps> = ({
         </div>
       </div>
       <img src="/movies/movie-scene.png" />
-      <div className={`playing-footer ${!isVisible ? "invisible" : ""}`}>
-        <div className="playing-progress">
-          <span>{currentTime}</span>
-          <ProgressBarMedia currentTime={currentTime} duration={duration} />
-          <span>{duration}</span>
-        </div>
-
-        <div className="playing-controls">
-          <FontAwesomeIcon icon={faUndoAlt} />
-          <FontAwesomeIcon icon={faPlay} />
-          <FontAwesomeIcon icon={faRedoAlt} />
-          <FontAwesomeIcon icon={faVolumeUp} />
-          <FontAwesomeIcon icon={faExpand} />
-        </div>
-      </div>
+      {isVisible && (
+        <PlayingFooter currentTime={currentTime} duration={duration} />
+      )}
     </div>
   );
 };
