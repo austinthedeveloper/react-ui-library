@@ -1,11 +1,10 @@
 import "./Playing.scss";
-
-import React, { useCallback, useEffect, useRef, useState } from "react";
-
+import React from "react";
+import { useAutoHide } from "./useAutoHide"; // <-- custom hook
 import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
 import { PlayingHeader } from "../PlayingHeader/PlayingHeader";
 
-type PlayingProps = {
+export type PlayingProps = {
   title: string;
   currentTime: string;
   duration: string;
@@ -22,49 +21,27 @@ const Playing: React.FC<PlayingProps> = ({
   autoHide = true,
   autoHideDelay = 2000,
 }) => {
-  const [isVisible, setIsVisible] = useState(true);
-  const hideTimer = useRef<NodeJS.Timeout | null>(null);
-  const resetHideTimer = useCallback(() => {
-    if (!autoHide) return;
+  const isVisible = useAutoHide(autoHide, autoHideDelay);
 
-    setIsVisible(true);
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-
-    hideTimer.current = setTimeout(() => {
-      setIsVisible(false);
-    }, autoHideDelay || 3000);
-  }, [autoHide, autoHideDelay]);
-  useEffect(() => {
-    if (!autoHide) return;
-
-    const handleUserActivity = () => resetHideTimer();
-
-    window.addEventListener("mousemove", handleUserActivity);
-    window.addEventListener("keydown", handleUserActivity);
-
-    resetHideTimer(); // Start the initial timer
-
-    return () => {
-      window.removeEventListener("mousemove", handleUserActivity);
-      window.removeEventListener("keydown", handleUserActivity);
-      if (hideTimer.current) clearTimeout(hideTimer.current);
-    };
-  }, [autoHide, resetHideTimer]);
+  const handleControl = (action: string) => {
+    console.log("Control clicked:", action);
+  };
 
   return (
     <div className="playing-container">
       <img src="/movies/movie-scene.png" />
+
       {isVisible && (
         <>
           <PlayingHeader
             brand={brand}
             title={title}
-            onControl={(action) => console.log("Control clicked:", action)}
+            onControl={handleControl}
           />
           <PlayingFooter
             currentTime={currentTime}
             duration={duration}
-            onControl={(action) => console.log("Control clicked:", action)}
+            onControl={handleControl}
           />
         </>
       )}
