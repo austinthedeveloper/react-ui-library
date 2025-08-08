@@ -49,7 +49,7 @@ export const VolumeControl: React.FC<VolumeControlProps> = ({
             min={0}
             max={1}
             step={0.01}
-            value={value}
+            value={isMuted ? 0 : value}
             onChange={handleSliderChange}
           />
         </div>

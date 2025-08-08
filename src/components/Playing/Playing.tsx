@@ -23,10 +23,19 @@ const Playing: React.FC<PlayingProps> = ({
 }) => {
   const isVisible = useAutoHide(autoHide, autoHideDelay);
   const [volume, setVolume] = useState(0.5);
+  const [previousVolume, setPreviousVolume] = useState(0.5);
   const [isMuted, setIsMuted] = useState(false);
 
   const handleControl = (action: string) => {
     console.log("Control clicked:", action);
+  };
+
+  const toggleMute = () => {
+    setIsMuted((prev) => {
+      if (!prev) setPreviousVolume(volume);
+      else setVolume(previousVolume);
+      return !prev;
+    });
   };
 
   return (
@@ -47,7 +56,7 @@ const Playing: React.FC<PlayingProps> = ({
             volume={volume}
             isMuted={isMuted}
             onVolumeChange={setVolume}
-            onMuteToggle={() => setIsMuted((prev) => !prev)}
+            onMuteToggle={toggleMute}
           />
         </>
       )}
