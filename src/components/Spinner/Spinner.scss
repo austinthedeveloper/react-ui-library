@@ -1,0 +1,125 @@
+/* Theme vars you can tweak */
+:root {
+  --spinner-accent: var(--bs-primary, #0d6efd);
+  --spinner-bg: rgba(0, 0, 0, 0.7);
+  --spinner-text: #fff;
+}
+
+/* Root container */
+.spinner-root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+.spinner-root--fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  pointer-events: all;
+  background: none;
+}
+
+/* optional dim overlay */
+.spinner-root--fullscreen[data-dim="1"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--spinner-bg);
+  backdrop-filter: blur(1px);
+}
+
+/* Filmstrip */
+.filmstrip {
+  position: relative;
+  aspect-ratio: 13 / 3; /* wide & cinematic */
+  max-width: 90vw;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  background: #101010;
+}
+
+/* sprocket holes */
+.holes {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 16px;
+  background: radial-gradient(circle at 12px 8px, #222 7px, transparent 8px)
+    repeat-x;
+  background-size: 40px 100%;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.05));
+  opacity: 0.9;
+  pointer-events: none;
+}
+.holes--top {
+  top: 0;
+}
+.holes--bottom {
+  bottom: 0;
+  transform: rotate(180deg);
+}
+
+/* moving frames */
+.strip-track {
+  position: absolute;
+  inset: 16px 0 16px 0; /* leave room for holes */
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 22%;
+  gap: 10px;
+  padding: 0 10px;
+  align-items: stretch;
+
+  /* animate continuous scroll */
+  animation: reel 1.15s linear infinite;
+}
+@keyframes reel {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-32%);
+  } /* matches card width+gap for loop feel */
+}
+
+/* individual frame look */
+.frame {
+  border-radius: 6px;
+  background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(0, 0, 0, 0.06)
+    ),
+    linear-gradient(
+      90deg,
+      var(--spinner-accent) 0%,
+      color-mix(in srgb, var(--spinner-accent), #fff 35%) 50%,
+      var(--spinner-accent) 100%
+    );
+  background-size: 300% 100%, 200% 100%;
+  animation: shine 1.6s ease-in-out infinite alternate;
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.35);
+}
+@keyframes shine {
+  from {
+    background-position: 0% 0, 0% 0;
+  }
+  to {
+    background-position: 0% 0, 100% 0;
+  }
+}
+
+.spinner-msg {
+  color: var(--spinner-text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  user-select: none;
+}
