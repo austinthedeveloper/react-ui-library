@@ -10,6 +10,7 @@ import {
   faClosedCaptioning,
   faTowerBroadcast,
 } from "@fortawesome/free-solid-svg-icons";
+import { calculateTimePercent } from "../../helpers";
 
 type PlayingProps = {
   title: string;
@@ -72,7 +73,12 @@ const Playing: React.FC<PlayingProps> = ({
         <div className="playing-progress">
           <span>{currentTime}</span>
           <div className="progress-bar">
-            <div className="progress-fill" style={{ width: "45%" }} />
+            <div
+              className="progress-fill"
+              style={{
+                width: `${calculateTimePercent(currentTime, duration)}%`,
+              }}
+            />
           </div>
           <span>{duration}</span>
         </div>
