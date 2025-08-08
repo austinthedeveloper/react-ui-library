@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
+import { PlayingHeader } from "../PlayingHeader/PlayingHeader";
 
 type PlayingProps = {
   title: string;
@@ -67,11 +68,18 @@ const Playing: React.FC<PlayingProps> = ({
       </div>
       <img src="/movies/movie-scene.png" />
       {isVisible && (
-        <PlayingFooter
-          currentTime={currentTime}
-          duration={duration}
-          onControl={(action) => console.log("Control clicked:", action)}
-        />
+        <>
+          <PlayingHeader
+            brand={brand}
+            title={title}
+            onControl={(action) => console.log("Control clicked:", action)}
+          />
+          <PlayingFooter
+            currentTime={currentTime}
+            duration={duration}
+            onControl={(action) => console.log("Control clicked:", action)}
+          />
+        </>
       )}
     </div>
   );

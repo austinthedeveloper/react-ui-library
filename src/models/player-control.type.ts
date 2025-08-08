@@ -3,4 +3,6 @@ export type PlayerControl =
   | "play"
   | "forward"
   | "volume"
-  | "fullscreen";
+  | "fullscreen"
+  | "cast"
+  | "cc";

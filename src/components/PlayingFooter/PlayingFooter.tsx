@@ -24,9 +24,6 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
   onSeek,
   onControl,
 }) => {
-  const handleControlClick = (type: PlayerControl) => {
-    onControl(type);
-  };
   return (
     <div className="playing-footer">
       <div className="playing-progress">
@@ -42,23 +39,20 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
       <div className="playing-controls">
         <FontAwesomeIcon
           icon={faUndoAlt}
-          onClick={() => handleControlClick("rewind")}
+          onClick={() => onControl?.("rewind")}
         />
-        <FontAwesomeIcon
-          icon={faPlay}
-          onClick={() => handleControlClick("play")}
-        />
+        <FontAwesomeIcon icon={faPlay} onClick={() => onControl?.("play")} />
         <FontAwesomeIcon
           icon={faRedoAlt}
-          onClick={() => handleControlClick("forward")}
+          onClick={() => onControl?.("forward")}
         />
         <FontAwesomeIcon
           icon={faVolumeUp}
-          onClick={() => handleControlClick("volume")}
+          onClick={() => onControl?.("volume")}
         />
         <FontAwesomeIcon
           icon={faExpand}
-          onClick={() => handleControlClick("fullscreen")}
+          onClick={() => onControl?.("fullscreen")}
         />
       </div>
     </div>
