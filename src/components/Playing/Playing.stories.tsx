@@ -27,3 +27,10 @@ export const Default: Story = {
     duration: "01:55:15",
   },
 };
+
+export const ShowControls: Story = {
+  args: {
+    ...Default.args,
+    autoHide: false,
+  },
+};
