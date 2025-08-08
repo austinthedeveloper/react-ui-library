@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import MediaCard from "./MediaCard";
 
 const meta: Meta<typeof MediaCard> = {
-  title: "Components/MediaCard",
+  title: "Media Components/MediaCard",
   component: MediaCard,
   tags: ["autodocs"],
   argTypes: {
@@ -73,6 +73,6 @@ export const WithProgress: Story = {
   args: {
     imageUrl: "/movies/image.png",
     title: "Movie Title",
-    progress: 60
-  }
+    progress: 60,
+  },
 };

@@ -3,7 +3,7 @@ import MediaCarousel from "./MediaCarousel";
 import { DummyMedia, DummyMediaExtremes } from "../../storybook/helpers";
 
 const meta: Meta<typeof MediaCarousel> = {
-  title: "Components/MediaCarousel",
+  title: "Media Components/MediaCarousel",
   component: MediaCarousel,
   tags: ["autodocs"],
 };

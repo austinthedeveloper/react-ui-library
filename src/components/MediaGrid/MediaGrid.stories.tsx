@@ -3,7 +3,7 @@ import MediaGrid from "./MediaGrid";
 import { DummyMedia, DummyMediaExtremes } from "../../storybook/helpers";
 
 const meta: Meta<typeof MediaGrid> = {
-  title: "Components/MediaGrid",
+  title: "Media Components/MediaGrid",
   component: MediaGrid,
 };
 
