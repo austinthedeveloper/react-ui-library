@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import "./Playing.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -30,7 +30,7 @@ const Playing: React.FC<PlayingProps> = ({
 }) => {
   const [isVisible, setIsVisible] = useState(true);
   const hideTimer = useRef<NodeJS.Timeout | null>(null);
-  const resetHideTimer = () => {
+  const resetHideTimer = useCallback(() => {
     if (!autoHide) return;
 
     setIsVisible(true);
@@ -39,7 +39,7 @@ const Playing: React.FC<PlayingProps> = ({
     hideTimer.current = setTimeout(() => {
       setIsVisible(false);
     }, autoHideDelay || 3000);
-  };
+  }, [autoHide, autoHideDelay]);
   useEffect(() => {
     if (!autoHide) return;
 
@@ -55,11 +55,11 @@ const Playing: React.FC<PlayingProps> = ({
       window.removeEventListener("keydown", handleUserActivity);
       if (hideTimer.current) clearTimeout(hideTimer.current);
     };
-  }, [autoHide, autoHideDelay]);
+  }, [autoHide, resetHideTimer]);
 
   return (
     <div className="playing-container">
-      <div className={`playing-header ${!isVisible ? "d-none" : ""}`}>
+      <div className={`playing-header ${!isVisible ? "invisible" : ""}`}>
         <span className="playing-label">{brand}</span>
         <span className="playing-title">{title}</span>
         <div className="playing-icons">
@@ -68,7 +68,7 @@ const Playing: React.FC<PlayingProps> = ({
         </div>
       </div>
       <img src="/movies/movie-scene.png" />
-      <div className={`playing-footer ${!isVisible ? "d-none" : ""}`}>
+      <div className={`playing-footer ${!isVisible ? "invisible" : ""}`}>
         <div className="playing-progress">
           <span>{currentTime}</span>
           <div className="progress-bar">
