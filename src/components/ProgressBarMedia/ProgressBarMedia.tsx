@@ -61,26 +61,23 @@ export const ProgressBarMedia: React.FC<ProgressBarProps> = ({
   const progressPercent = calculateTimePercent(currentTime, duration); // already built
 
   return (
-    <div className="progress-bar-media-wrapper">
+    <div
+      className="progress-bar-media-wrapper"
+      ref={barRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {hoverTime && (
         <div className="progress-tooltip" style={{ left: tooltipX }}>
           {hoverTime}
         </div>
       )}
-      <span className="progress-current">{currentTime}</span>
-      <div
-        className="progress-track"
-        ref={barRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        onClick={handleClick}
-      >
+      <div className="progress-track" onClick={handleClick}>
         <div
           className="progress-fill"
           style={{ width: `${progressPercent}%` }}
         />
       </div>
-      <span className="progress-duration">{duration}</span>
     </div>
   );
 };
