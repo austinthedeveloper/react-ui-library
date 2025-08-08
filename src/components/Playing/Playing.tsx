@@ -67,7 +67,11 @@ const Playing: React.FC<PlayingProps> = ({
       </div>
       <img src="/movies/movie-scene.png" />
       {isVisible && (
-        <PlayingFooter currentTime={currentTime} duration={duration} />
+        <PlayingFooter
+          currentTime={currentTime}
+          duration={duration}
+          onControl={(action) => console.log("Control clicked:", action)}
+        />
       )}
     </div>
   );

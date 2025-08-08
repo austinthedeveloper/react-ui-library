@@ -9,18 +9,24 @@ import {
   faExpand,
 } from "@fortawesome/free-solid-svg-icons";
 import "./PlayingFooter.scss";
+import type { PlayerControl } from "../../models";
 
 interface PlayingFooterProps {
   currentTime: string;
   duration: string;
   onSeek?: (seconds: string) => void;
+  onControl: (action: PlayerControl) => void;
 }
 
 export const PlayingFooter: React.FC<PlayingFooterProps> = ({
   currentTime,
   duration,
   onSeek,
+  onControl,
 }) => {
+  const handleControlClick = (type: PlayerControl) => {
+    onControl(type);
+  };
   return (
     <div className="playing-footer">
       <div className="playing-progress">
@@ -34,11 +40,26 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
       </div>
 
       <div className="playing-controls">
-        <FontAwesomeIcon icon={faUndoAlt} />
-        <FontAwesomeIcon icon={faPlay} />
-        <FontAwesomeIcon icon={faRedoAlt} />
-        <FontAwesomeIcon icon={faVolumeUp} />
-        <FontAwesomeIcon icon={faExpand} />
+        <FontAwesomeIcon
+          icon={faUndoAlt}
+          onClick={() => handleControlClick("rewind")}
+        />
+        <FontAwesomeIcon
+          icon={faPlay}
+          onClick={() => handleControlClick("play")}
+        />
+        <FontAwesomeIcon
+          icon={faRedoAlt}
+          onClick={() => handleControlClick("forward")}
+        />
+        <FontAwesomeIcon
+          icon={faVolumeUp}
+          onClick={() => handleControlClick("volume")}
+        />
+        <FontAwesomeIcon
+          icon={faExpand}
+          onClick={() => handleControlClick("fullscreen")}
+        />
       </div>
     </div>
   );
