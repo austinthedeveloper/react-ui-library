@@ -53,6 +53,7 @@ const Playing: React.FC<PlayingProps> = ({
           tag === "button";
         if (isTypingElement) return;
       }
+      console.log("hit", e.key);
 
       switch (e.key) {
         case " ": // Space: toggle play/pause
