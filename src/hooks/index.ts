@@ -1,3 +1,4 @@
+export * from './useAriaAnnouncement';
 export * from './useMeasureElementWidth';
 export * from './useMediaKeyboardShortcuts';
 export * from './useRovingFocus';
