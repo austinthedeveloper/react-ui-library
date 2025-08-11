@@ -1,8 +1,9 @@
 import "./Playing.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAutoHide } from "./useAutoHide"; // <-- custom hook
 import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
 import { PlayingHeader } from "../PlayingHeader/PlayingHeader";
+import { useMediaKeyboardShortcuts } from "../../hooks";
 
 export type PlayingProps = {
   title: string;
@@ -39,56 +40,7 @@ const Playing: React.FC<PlayingProps> = ({
   };
 
   // Global keyboard shortcuts for media control
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      // Avoid hijacking keys while typing in inputs, textareas, selects, buttons, or editable regions
-      const target = e.target as HTMLElement | null;
-      if (target) {
-        const tag = target.tagName?.toLowerCase();
-        const isTypingElement =
-          target.isContentEditable ||
-          tag === "input" ||
-          tag === "textarea" ||
-          tag === "select" ||
-          tag === "button";
-        if (isTypingElement) return;
-      }
-      console.log("hit", e.key);
-
-      switch (e.key) {
-        case " ": // Space: toggle play/pause
-          e.preventDefault();
-          handleControl("togglePlay");
-          break;
-        case "m": // M: mute/unmute
-        case "M":
-          e.preventDefault();
-          toggleMute();
-          break;
-        case "ArrowUp": // Volume up
-          e.preventDefault();
-          setVolume((v) => Math.min(1, v + 0.05));
-          break;
-        case "ArrowDown": // Volume down
-          e.preventDefault();
-          setVolume((v) => Math.max(0, v - 0.05));
-          break;
-        case "ArrowRight": // Seek forward (delegate to footer control logic)
-          e.preventDefault();
-          handleControl("seekForward");
-          break;
-        case "ArrowLeft": // Seek backward
-          e.preventDefault();
-          handleControl("seekBackward");
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [toggleMute]);
+  useMediaKeyboardShortcuts(handleControl, toggleMute, setVolume);
 
   return (
     <div
