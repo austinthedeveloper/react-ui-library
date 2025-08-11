@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useAutoHide } from "./useAutoHide"; // <-- custom hook
 import { PlayingFooter } from "../PlayingFooter/PlayingFooter";
 import { PlayingHeader } from "../PlayingHeader/PlayingHeader";
+import { useMediaKeyboardShortcuts } from "../../hooks";
 
 export type PlayingProps = {
   title: string;
@@ -38,8 +39,16 @@ const Playing: React.FC<PlayingProps> = ({
     });
   };
 
+  // Global keyboard shortcuts for media control
+  useMediaKeyboardShortcuts(handleControl, toggleMute, setVolume);
+
   return (
-    <div className="playing-container">
+    <div
+      className="playing-container"
+      tabIndex={0}
+      aria-label="Now playing"
+      role="region"
+    >
       <img src="/movies/movie-scene.png" />
 
       {isVisible && (

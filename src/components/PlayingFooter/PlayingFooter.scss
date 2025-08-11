@@ -32,5 +32,34 @@
         opacity: 1;
       }
     }
+
+    button {
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: inherit;
+      color: inherit;
+      cursor: pointer;
+
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #fff; /* Visible focus ring for keyboard users */
+        outline-offset: 2px;
+      }
+
+      svg {
+        opacity: 0.7;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
   }
 }

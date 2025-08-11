@@ -23,16 +23,24 @@ export const PlayingHeader: React.FC<PlayingHeaderProps> = ({
       <span className="playing-label">{brand}</span>
       <span className="playing-title">{title}</span>
       <div className="playing-icons">
-        <FontAwesomeIcon
-          icon={faTowerBroadcast}
+        <button
+          type="button"
+          className="control-btn cast"
+          aria-label="Cast"
+          title="Cast"
           onClick={() => onControl?.("cast")}
-          className="clickable-icon"
-        />
-        <FontAwesomeIcon
-          icon={faClosedCaptioning}
+        >
+          <FontAwesomeIcon icon={faTowerBroadcast} />
+        </button>
+        <button
+          type="button"
+          className="control-btn captions"
+          aria-label="Closed Captions"
+          title="Closed Captions"
           onClick={() => onControl?.("cc")}
-          className="clickable-icon"
-        />
+        >
+          <FontAwesomeIcon icon={faClosedCaptioning} />
+        </button>
       </div>
     </div>
   );

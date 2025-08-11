@@ -1,4 +1,4 @@
-import React from "react";
+import { forwardRef, type KeyboardEvent } from "react";
 import classNames from "classnames";
 import "./MediaCard.scss";
 
@@ -9,57 +9,68 @@ export type MediaCardProps = {
   label?: string; // e.g., “New”, “HD”
   onClick?: () => void;
   progress?: number;
+  tabIndex?: number; // managed by MediaGrid (roving tabindex)
 };
 
-const MediaCard: React.FC<MediaCardProps> = ({
-  imageUrl,
-  size = "md",
-  label,
-  progress = 0,
-  onClick,
-}) => {
-  const classes = classNames("media-card", {
-    "media-card-sm": size === "sm",
-    "media-card-md": size === "md",
-    "media-card-lg": size === "lg",
-  });
+const MediaCard = forwardRef<HTMLDivElement, MediaCardProps>(
+  (
+    { imageUrl, size = "md", label, progress = 0, onClick, title, tabIndex },
+    ref
+  ) => {
+    const classes = classNames("media-card", {
+      "media-card-sm": size === "sm",
+      "media-card-md": size === "md",
+      "media-card-lg": size === "lg",
+    });
 
-  const getActionLabel = () => {
-    if (progress === 0) return "Watch Now";
-    if (progress === 100) return "Watch Again";
-    return "Resume";
-  };
+    const getActionLabel = () => {
+      if (progress === 0) return "Watch Now";
+      if (progress === 100) return "Watch Again";
+      return "Resume";
+    };
 
-  return (
-    <div
-      className={classes}
-      onClick={onClick}
-      style={{ cursor: onClick ? "pointer" : "default" }}
-    >
+    const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
+      if (e.key === " " || e.key === "Enter") {
+        // Space/Enter activates the card
+        e.preventDefault();
+        onClick?.();
+      }
+    };
+
+    return (
       <div
-        className="media-card-image-wrapper"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      ></div>
-      {label && <span className="media-card-label">{label}</span>}
-      {/* Progress */}
-      {typeof progress === "number" && progress > 0 && (
-        <div className="media-card-progress">
-          <div
-            className="media-card-progress-bar"
-            style={{
-              width: `${progress}%`,
-            }}
-          ></div>
-        </div>
-      )}
-      {/* Watch Button */}
-      {onClick && (
-        <button className="media-card-action btn btn-primary">
-          {getActionLabel()}
-        </button>
-      )}
-    </div>
-  );
-};
+        ref={ref}
+        className={classes}
+        onClick={onClick}
+        onKeyDown={onKey}
+        role={onClick ? "button" : undefined}
+        aria-label={title || label || "Media item"}
+        tabIndex={tabIndex ?? (onClick ? 0 : -1)}
+        style={{ cursor: onClick ? "pointer" : "default" }}
+      >
+        <div
+          className="media-card-image-wrapper"
+          style={{ backgroundImage: `url(${imageUrl})` }}
+        ></div>
+        {label && <span className="media-card-label">{label}</span>}
+        {/* Progress */}
+        {typeof progress === "number" && progress > 0 && (
+          <div className="media-card-progress">
+            <div
+              className="media-card-progress-bar"
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
+        )}
+        {/* Watch Button */}
+        {onClick && (
+          <button className="media-card-action btn btn-primary">
+            {getActionLabel()}
+          </button>
+        )}
+      </div>
+    );
+  }
+);
 
 export default MediaCard;

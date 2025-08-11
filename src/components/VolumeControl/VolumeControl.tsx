@@ -38,8 +38,29 @@ export const VolumeControl: React.FC<VolumeControlProps> = ({
       className="volume-control"
       onMouseEnter={() => setShowSlider(true)}
       onMouseLeave={() => setShowSlider(false)}
+      onFocus={() => setShowSlider(true)}
+      onBlur={(e) => {
+        // Close only when focus leaves the entire volume control
+        const current = e.currentTarget as HTMLDivElement;
+        const related = e.relatedTarget as Node | null;
+        if (!current.contains(related)) {
+          setShowSlider(false);
+        }
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Escape") setShowSlider(false);
+      }}
     >
-      <FontAwesomeIcon icon={icon} onClick={onToggleMute} />
+      <button
+        type="button"
+        className="volume-toggle"
+        onClick={onToggleMute}
+        aria-label={isMuted ? "Unmute" : "Mute"}
+        aria-pressed={isMuted}
+        title={isMuted ? "Unmute" : "Mute"}
+      >
+        <FontAwesomeIcon icon={icon} />
+      </button>
 
       {showSlider && (
         <div className="volume-slider-wrapper">
@@ -51,6 +72,7 @@ export const VolumeControl: React.FC<VolumeControlProps> = ({
             step={0.01}
             value={isMuted ? 0 : value}
             onChange={handleSliderChange}
+            aria-label="Volume"
           />
         </div>
       )}

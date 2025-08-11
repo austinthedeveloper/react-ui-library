@@ -5,7 +5,6 @@ import {
   faPlay,
   faUndoAlt,
   faRedoAlt,
-  faVolumeUp,
   faExpand,
 } from "@fortawesome/free-solid-svg-icons";
 import "./PlayingFooter.scss";
@@ -46,25 +45,52 @@ export const PlayingFooter: React.FC<PlayingFooterProps> = ({
       </div>
 
       <div className="playing-controls">
-        <FontAwesomeIcon
-          icon={faUndoAlt}
+        <button
+          type="button"
+          className="control-btn rewind"
+          aria-label="Rewind"
+          title="Rewind"
           onClick={() => onControl?.("rewind")}
-        />
-        <FontAwesomeIcon icon={faPlay} onClick={() => onControl?.("play")} />
-        <FontAwesomeIcon
-          icon={faRedoAlt}
+        >
+          <FontAwesomeIcon icon={faUndoAlt} />
+        </button>
+
+        <button
+          type="button"
+          className="control-btn play"
+          aria-label="Play"
+          title="Play"
+          onClick={() => onControl?.("play")}
+        >
+          <FontAwesomeIcon icon={faPlay} />
+        </button>
+
+        <button
+          type="button"
+          className="control-btn forward"
+          aria-label="Forward"
+          title="Forward"
           onClick={() => onControl?.("forward")}
-        />
+        >
+          <FontAwesomeIcon icon={faRedoAlt} />
+        </button>
+
         <VolumeControl
           value={volume}
           isMuted={isMuted}
           onChange={onVolumeChange}
           onToggleMute={onMuteToggle}
         />
-        <FontAwesomeIcon
-          icon={faExpand}
+
+        <button
+          type="button"
+          className="control-btn fullscreen"
+          aria-label="Fullscreen"
+          title="Fullscreen"
           onClick={() => onControl?.("fullscreen")}
-        />
+        >
+          <FontAwesomeIcon icon={faExpand} />
+        </button>
       </div>
     </div>
   );
